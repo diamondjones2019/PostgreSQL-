@@ -50,12 +50,12 @@ WHERE sales.category_name = 'TEQUILA' isnull;
 
 
 Correct Answer: 
-SELECT products.item_no 		#what distinguishes all tequilas?
+SELECT products.item_no 	
 FROM products
 LEFT JOIN sales
-ON products.item_no = sales.item		#similar columns
-WHERE products.category_name ILIKE 'TEQUILA'		#tequila names only
-AND sales.total ISNULL			#what is the total and how many aren’t sold
+ON products.item_no = sales.item		
+WHERE products.category_name ILIKE 'TEQUILA'		
+AND sales.total ISNULL			
 ORDER BY 1;
 
 
@@ -69,13 +69,13 @@ SELECT DISTINCT(sales.description)
 FROM sales
 LEFT JOIN stores
 ON sales.store = stores.store
-WHERE stores.store_address ILIKE '%Mason City%';
-
 
 Correct Answer: 
 SELECT DISTINCT(sales.description)
 FROM sales
 LEFT JOIN stores
+WHERE stores.store_address ILIKE '%Mason City%';
+
 ON sales.store = stores.store
 WHERE stores.store_address ILIKE '%Mason City%';
 
