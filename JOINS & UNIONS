@@ -1,0 +1,71 @@
+-- Table Unions --
+SELECT *
+FROM fy17
+UNION
+SELECT *
+FROM fy18;
+
+
+
+--Column Union--
+SELECT fy, pd, store_name, week1
+FROM FY17
+UNION
+SELECT fy, pd, store_name, week2
+FROM FY17;
+
+
+
+--Combination of both-- 
+SELECT fy, pd, store_name, week1 FROM fy17
+UNION
+SELECT fy, pd, store_name, week2 FROM fy17
+UNION
+SELECT fy, pd, store_name, week3 FROM fy17
+UNION
+SELECT fy, pd, store_name, week4 FROM fy17
+UNION
+SELECT fy, pd, store_name, week1 FROM fy18
+UNION
+SELECT fy, pd, store_name, week2 FROM fy18
+UNION
+SELECT fy, pd, store_name, week3 FROM fy18
+UNION
+SELECT fy, pd, store_name, week4 FROM fy18
+ORDER BY 1,2,3;
+
+
+
+
+
+
+--Let’s alter this code a bit so it will work better:	
+SELECT b.item_no, b.item_description, a.total
+FROM the Sales table and the Products table. 
+Next, write a query to perform the following:
+Find the common field on which to JOIN them.
+Limit results to the first 1000
+
+SELECT prod.item_no, 
+       prod.item_description, 
+       sls.total 
+FROM   sales sls 
+       INNER JOIN products prod 
+               ON sls.item = prod.item_no 
+ORDER  BY sls.total 
+LIMIT  1000
+
+
+
+
+Write a query to discover which DISTINCT products were sold in Mason City, IA.	
+Return the product description, category, and store address columns.
+Qualify DISTINCT
+Select appropriately aliased items FROM the Sales and Stores tables. 
+Connect the matching columns with the USING structure.
+
+SELECT DISTINCT a.description, a.category_name, b.store_address
+FROM sales a
+INNER JOIN stores b
+USING(store)
+WHERE b.store_address LIKE ‘%Mason City%’;
