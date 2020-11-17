@@ -1,0 +1,28 @@
+1. Which products come in packs larger than 12?
+SELECT COUNT ( item_no) FROM products WHERE pack > 12; 
+
+
+1a.  How many unique products have less than 12 in a pack?
+Select distinct * from products where pack < 12; 
+
+
+2. Which products have a case price of less than $70?
+SELECT DISTINCT item_description FROM products WHERE case_cost < 70; 
+
+
+
+3. Which products come in packs larger than 12 AND have a case_cost of less than $70? 
+SELECT DISTINCT item_description FROM products WHERE case_cost < 70 AND pack > 12; 
+
+
+4. Which types of products have a proof of 85 or higher?
+Try: SELECT DISTINCT category_name FROM products WHERE proof > =85;
+
+
+5. Which products are scotch whiskies OR are higher than 85 proof?
+SELECT DISTINCT item_description FROM products WHERE CAST(proof AS integer) > 85 OR category_name = 'SCOTCH WHISKEY';
+
+
+6. How many stores are active (using store_status)? 
+SELECT Count(*) from stores where store_status = 'A' 
+SELECT Count(*) from stores where store_status = 'I'
