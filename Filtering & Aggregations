@@ -1,0 +1,26 @@
+Which products have a case cost of more than $100?
+select * from products where case_cost > 100
+
+
+Which tequilas have a case cost of more than $100?
+select * from products where case_cost > 100 and category_name = 'TEQUILA'
+
+
+Which tequilas or scotch whiskies have a case cost of more than $100?
+select * from products where case_cost > 100 and category_name in ('TEQUILA', 'SCOTCH WHISKIES')
+
+
+Which tequilas or scotch whiskies have a cast cost between $100 and $120?
+select * from products where case_cost between 100 and 120 and category_name in ('TEQUILA', 'SCOTCH WHISKIES')
+
+
+Which whiskies of any kind cost more than $100?
+select * from products where case_cost > 100 and category_name like '%WHISKIES%'
+
+
+Which whiskies of any kind cost between $100 and $150?
+select * from products where case_cost between 100 and 150 and category_name like '%WHISKIES%'
+
+
+Which products, excluding tequilas, cost between $100 and $120?
+select * from products where case_cost between 100 and 120 and category_name != 'TEQUILA'
