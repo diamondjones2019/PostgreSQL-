@@ -1,0 +1,130 @@
+1.	Show the sales in the database completed at an active store.
+Try connecting the keys with “USING.”
+Limit to 1,000 rows.
+Experiment with grouping and order.
+
+My answer: 
+SELECT stores.store
+FROM stores
+LEFT JOIN sales
+USING(store)
+WHERE stores.store_status = 'A' 
+LIMIT 1000;
+
+
+
+Correct Answer:
+SELECT stores.store, sales.total
+FROM stores
+LEFT JOIN sales
+USING(store)
+WHERE stores.store_status = 'A' AND sales.total notnull
+LIMIT 1000;
+
+
+
+2.	Which sales included tequila products?
+
+My answer: 
+SELECT *
+FROM sales
+WHERE sales.category_name LIKE '%TEQUILA%';
+
+
+Correct Answer: 
+SELECT *
+FROM sales
+WHERE sales.category_name ILIKE '%TEQUILA%';
+
+
+
+3.	Which tequila products were not sold?
+
+My answer: 
+SELECT products.category_name
+FROM products
+LEFT JOIN sales
+ON products.category_name = sales.category_name
+WHERE sales.category_name = 'TEQUILA' isnull;
+
+
+
+Correct Answer: 
+SELECT products.item_no 		#what distinguishes all tequilas?
+FROM products
+LEFT JOIN sales
+ON products.item_no = sales.item		#similar columns
+WHERE products.category_name ILIKE 'TEQUILA'		#tequila names only
+AND sales.total ISNULL			#what is the total and how many aren’t sold
+ORDER BY 1;
+
+
+
+
+
+4.	Which distinct products were sold in Mason City, IA?
+
+My answer: 
+SELECT DISTINCT(sales.description)
+FROM sales
+LEFT JOIN stores
+ON sales.store = stores.store
+WHERE stores.store_address ILIKE '%Mason City%';
+
+
+Correct Answer: 
+SELECT DISTINCT(sales.description)
+FROM sales
+LEFT JOIN stores
+ON sales.store = stores.store
+WHERE stores.store_address ILIKE '%Mason City%';
+
+
+
+
+
+5.	Which Scotch whiskies were sold in Mason City, IA?
+
+My answer: 
+SELECT sales.description
+FROM sales
+LEFT JOIN stores
+ON (store)
+WHERE stores.store_address ILIKE '%Mason City%' 
+AND sales.category_name ILIKE '%Scotch Whiskies%';
+
+
+Correct Answer: 
+SELECT sales.description
+FROM sales
+LEFT JOIN stores
+USING(store)
+WHERE stores.store_address ILIKE '%Mason City%' 
+AND sales.category_name ILIKE '%Scotch Whiskies%';
+
+
+
+
+
+
+6.	Which unique products, other than whiskies, were sold in Mason City, IA?
+
+My answer: 
+SELECT DISTINCT sales.category_name
+FROM sales
+LEFT JOIN stores
+USING(store)
+WHERE stores.store_address ILIKE '%Mason City%' 
+AND sales.category_name NOT ILIKE '%Scotch Whiskies%'
+GROUP BY sales.category_name;
+
+
+Correct Answer: 
+SELECT DISTINCT sales.category_name
+FROM sales
+LEFT JOIN stores
+USING(store)
+WHERE stores.store_address ILIKE '%Mason City%' 
+AND sales.category_name NOT ILIKE '%Scotch Whiskies%'
+GROUP BY sales.category_name;
+
