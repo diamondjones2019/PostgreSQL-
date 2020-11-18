@@ -1,0 +1,17 @@
+#Cleaning Data - NULLS
+
+--Can't report any upc data that is equal to a null--
+SELECT vendor_name, item_description 
+FROM products
+WHERE upc = ‘NULL’;
+
+
+--Find what upc data is null--
+SELECT vendor_name, item_description, upc 
+FROM products 
+WHERE upc IS NULL;
+
+
+--Report not null data in upc column--
+SELECT vendor_name, item_description, upc 
+FROM products WHERE upc IS NOT NULL;	
