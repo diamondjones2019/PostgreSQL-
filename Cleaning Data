@@ -15,3 +15,53 @@ WHERE upc IS NULL;
 --Report not null data in upc column--
 SELECT vendor_name, item_description, upc 
 FROM products WHERE upc IS NOT NULL;	
+
+
+
+
+
+
+
+
+#Cleaning Data - CASE function 
+
+--Let’s say we want to classify Iowa’s counties as either--
+Small (less than 100,000 people)
+Medium (100,000-to-400,000 people)
+Large (more than 400,000 people)
+
+
+--My Answer--
+SELECT *
+FROM counties;
+
+SELECT population, county,
+CASE 
+	WHEN population < 100000 THEN 'Small'
+	WHEN population >= 100000 AND population < 400000 THEN 'Medium'
+	WHEN population > 400000 THEN 'Large'
+END coutry_size
+FROM counties;
+
+
+
+
+
+--Calculate the percentage of items in the liquor product offerings that are whiskey products--
+
+--My answer--
+SELECT AVG(bottle_price),
+CASE
+	WHEN category_name 'Whiskey' THEN 1
+	ELSE 0 
+FROM products;
+
+
+
+--Correct Answer--
+SELECT round((avg ( 
+       CASE 
+              WHEN category_name ilike ‘%whisk%’ THEN 1 
+              ELSE 0 
+       END)*100), 2) AS pct_whiskey_products 
+FROM products;
